@@ -15,36 +15,19 @@ mongoose.connect(DB,{
     // console.log(con.connections)
     console.log(`DB connection successful`);
 })
-// MongoDB schema using mongoose
-const tourSchema = new mongoose.Schema({
-    name:{
-    type: String,
-    required:[true, 'A tour must have a name'],   // to get a error if name is not given, put it in array and pass a boolean and an error string
-    unique: true 
-    },
-    rating:{
-    type:Number,
-    default:4.5    
-    },
-    price:{
-    type: Number,
-    required:[true, 'A tour must have a price'],
-    }
-});
-
-const Tour = mongoose.model('Tour',tourSchema);
- 
+/*
+// CREATING A TOUR 
 const testTour = new Tour({
     name: 'The Park Camper',
     // rating: 4.7,
     price:777 
 })
- 
 testTour.save().then(doc=>{     // testTour.save() returns a promise that we can consume.
     console.log(doc);
 }).catch(err=>{
     console.log(`Error:`,err);
 });
+*/
 
 const app = require('./app2');
 // this tells about current environment variable i.e development 

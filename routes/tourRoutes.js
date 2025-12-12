@@ -3,7 +3,7 @@ const handler = require('../controllers/tourController');
 
 const tourRouter = express.Router();
 
-tourRouter.param('id',handler.checkID);
+// tourRouter.param('id',handler.checkID);
 
 // tourRouter.param('id',(req,res,next,val)=>{     // in param middleware we get access to a fourth arguement value
 //     // console.log(`Tour id is ${val}`);   // now this only prints for id in tour api not user api cause its in tour 
