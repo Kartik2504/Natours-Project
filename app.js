@@ -18,10 +18,10 @@ app.post('/',(req,res)=>{
 })
 */
 
-// this is called route handler
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`,'utf8'));
 // console.log(tours);
 
+// this is called route handler
 
 app.get('/api/v1/tours', (req,res)=>{
     res.status(200).json({
@@ -61,6 +61,7 @@ app.get('/api/v1/tours/:id',(req,res)=>{    // to make a api parameter optional 
 app.post('/api/v1/tours',(req,res)=>{
     // console.log(req.body);
     const newId = tours[tours.length-1].id + 1;
+    // eslint-disable-next-line prefer-object-spread
     const newTour = Object.assign({id:newId},req.body);
     tours.push(newTour);
     // console.log(tours);
