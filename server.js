@@ -5,7 +5,8 @@ const dotenv = require('dotenv');
 
 dotenv.config({path:'./config.env'});  // this connects node app to .env file in file system
 
-const DB = process.env.DATABASE.replace('<PASSWORD>',process.env.DATABASE_PASSWORD);
+const DB = process.env.DATABASE;
+// .replace('<PASSWORD>',process.env.DATABASE_PASSWORD);
 
 mongoose.connect(DB,{
     // useNewUrlParser:true,
