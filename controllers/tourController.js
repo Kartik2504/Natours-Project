@@ -55,26 +55,25 @@ exports.getAllTours = async (req,res)=>{
     const queryObj = {...req.query} // to make a shallow copy 
     const excludedFields = ['page','sort','limit','fields'];   // we don't want these el as queries in url
     excludedFields.forEach(el=>delete queryObj[el])
-    console.log(req.query,queryObj);
-
+    // console.log(req.query,queryObj);
+    
+    
+    // 1B) ADVANCED FILTERING
+    // this is the query with $ that mongodb understands from mongoose but -- poin two
     // {difficulty: 'easy',duration: {$gte:5}}  // how the query would look just for understanding purpose
     // { difficulty: 'easy', duration: { gte: '5' } } // the query we get from postman $ is missing 
-    // .where('duration').equals(5).where('difficulty').equals('easy');
-   
-    // 1B) ADVANCED FILTERING
-
-        // solution for missing $ operator
-        let queryStr = JSON.stringify(queryObj);
-        queryStr=queryStr.replace(/\b(gte|gt|lt|lte)\b/g,match=>`$${match}`);
-        console.log(JSON.parse(queryStr));
-
-        //EXECUTE QUERY
-        let query = Tour.find(
-            JSON.parse(queryStr)
-            // queryObj
-            // { duration:5,
-            // difficulty:'easy'}
-        );
+    // solution for missing $ operator
+    let queryStr = JSON.stringify(queryObj);
+    queryStr=queryStr.replace(/\b(gte|gt|lt|lte)\b/g,match=>`$${match}`); // \b says match only this exact word not other words that may have gte or gt...
+    console.log(req.query,queryObj,JSON.parse(queryStr));
+    
+    //EXECUTE QUERY
+    let query = Tour.find(
+        JSON.parse(queryStr)
+        // queryObj
+        // { duration:5,
+        // difficulty:'easy'}
+    );// .where('duration').equals(5).where('difficulty').equals('easy');
 
         // 2) SORTING   sort('price') to sort on multiple basis sort('price ratingsAverage') 
         if(req.query.sort){
